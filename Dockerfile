@@ -2,8 +2,6 @@ FROM alpine
 
 MAINTAINER qinqie<qinqie@live.cn>
 
-RUN apk add --update musl git curl perl libgcc libbz2 libffi libgcrypt ncurses-libs build-base python-dev gfortran
-RUN apk add openblas openblas-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 ENV PYPY pypy-5.3.1-linux_x86_64-portable
 ENV GLIBC_VER 2.21-r2
@@ -18,10 +16,6 @@ RUN cd /tmp/ && \
     rm -rf /tmp/${PYPY}
 
 RUN ln -s /usr/lib/pypy/bin/pypy /usr/local/bin/pypy
-
-RUN ln -s -f /usr/lib/libncurses.so.5.9 /usr/lib/libtinfo.so.5 && \
-    ln -s -f /usr/lib/libbz2.so.1 /usr/lib/libbz2.so.1.0 && \
-    ln -s -f /usr/lib/libgcrypt.so.20 /usr/lib/libcrypt.so.1
 
 RUN ldd /usr/lib/pypy/bin/pypy
 RUN cd /tmp/ && \
